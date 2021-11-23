@@ -14,6 +14,19 @@ function App() {
     setTodos([...todos, todo]);
   }
 
+  const deleteItem = (event, index) => {
+    const deleteThis = event.target.id;
+    // var filtered = todos.filter((todo, i) => i !== index);
+    // setTodos([filtered]);
+    setTodos(
+      todos.filter(
+      (todo, index, todos) => index != deleteThis
+      )
+      );
+    console.log(todos);
+
+  }
+
   return (
     <div className="App">
       <h1>Simple Todo List</h1>
@@ -30,6 +43,7 @@ function App() {
             <tr key={index}>
               <td>{todo.date}</td>
               <td>{todo.desc}</td>
+              <button id={index} onClick = {deleteItem}>Delete</button>
             </tr>
           )
         }
