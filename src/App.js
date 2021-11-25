@@ -1,5 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
+//importing Todolist from the components folder so that the table can be rendered
+import Todotable from './components/Todolist'
 
 function App() {
   const [todo, setTodo] = useState({desc: '', date: ''});
@@ -16,6 +18,7 @@ function App() {
 
   const deleteItem = (event, index) => {
     const deleteThis = event.target.id;
+    console.log("we went here");
     // var filtered = todos.filter((todo, i) => i !== index);
     // setTodos([filtered]);
     setTodos(
@@ -35,20 +38,8 @@ function App() {
         Description: <input type="text" name="desc" value={todo.desc} onChange={inputChanged}/>
         <input type="submit" value="Add"/>
       </form>
-      <table>
-        <tbody>
-          <tr><th>Date</th><th>Description</th></tr>
-         { 
-          todos.map((todo, index) => 
-            <tr key={index}>
-              <td>{todo.date}</td>
-              <td>{todo.desc}</td>
-              <button id={index} onClick = {deleteItem}>Delete</button>
-            </tr>
-          )
-        }
-        </tbody>
-      </table>
+      {/* todos array is passed as a prop to Todolist.js using key "todos" */}
+      <Todotable todos={todos} delete={deleteItem}></Todotable>
     </div>
   );
 }
